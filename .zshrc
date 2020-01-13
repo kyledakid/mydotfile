@@ -1,14 +1,17 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export TERM="xterm-256color"
+export PATH="$HOME/.anyenv/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
+export GOBIN="$GOPATH/bin"
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
+eval "$(anyenv init - zsh)"
+eval "$(goenv init - zsh)"
+eval "$(pyenv init - zsh)"
 
-DOCKERCMD='docker run --rm -v $(pwd):/usr/src/app -w /usr/src/app'
-alias node="$DOCKERCMD node:lts-alpine node"
-alias npm="$DOCKERCMD node:lts-alpine npm"
-alias mypy="$DOCKERCMD python:3 python"
-alias go="$DOCKERCMD golang:1.13.5 go"
+alias v='nvim'
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -22,6 +25,7 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon vcs dir)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status aws root_indicator time)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 [ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
+[ -f ~/.docker_aliases ] && source ~/.docker_aliases
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
