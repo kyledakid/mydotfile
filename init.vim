@@ -6,6 +6,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'sheerun/vim-polyglot'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 syntax on
@@ -30,4 +32,10 @@ let NERDTreeShowHidden=1
 " Map Keys
 let mapleader = ","
 noremap <leader>n :NERDTreeToggle<CR>
+noremap <leader>ga :G add --all<CR>
+noremap <leader>gc :G commit -a<CR>
+noremap <leader>gp :Gpush<CR>
+noremap <leader>f :FZF<CR>
+noremap <leader>a :Ag<CR>
+noremap <leader>r :Rg<CR>
 
