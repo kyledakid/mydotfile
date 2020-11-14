@@ -13,7 +13,6 @@ call plug#end()
 syntax on
 filetype plugin indent on
 set t_Co=256
-set colorcolumn=80
 set clipboard+=unnamedplus
 set nu
 set ruler
@@ -32,10 +31,12 @@ let NERDTreeShowHidden=1
 " Map Keys
 let mapleader = ","
 noremap <leader>n :NERDTreeToggle<CR>
-noremap <leader>ga :G add --all<CR>
-noremap <leader>gc :G commit -a<CR>
-noremap <leader>gp :Gpush<CR>
-noremap <leader>f :FZF<CR>
-noremap <leader>a :Ag<CR>
-noremap <leader>r :Rg<CR>
+nnoremap <leader>f :FZF<CR>
+nnoremap <leader>a :Ag<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>r :Rg<CR>
+nnoremap <leader>ga :G add --all<CR>
+nnoremap <leader>gc :G commit -a<CR>
+nnoremap <leader>gp :Gpush<CR>
+autocmd FileType go nmap <leader>r :w<CR>:vsplit <bar> terminal go run %<CR>
 
