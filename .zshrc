@@ -1,28 +1,32 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+#zmodload zsh/zprof
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export TERM="xterm-256color"
-export PATH="$HOME/.anyenv/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
+export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="/usr/local/opt/curl/bin:$HOME/bin:/usr/local/bin:$GOBIN:${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
-eval "$(anyenv init - zsh)"
-eval "$(goenv init - zsh)"
-eval "$(pyenv init - zsh)"
+
+alias tf=terraform
+alias cat=bat
+alias nv=nvim
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-POWERLEVEL9K_MODE='nerdfont-complete'
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 DEFAULT_USER=kyle
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon vcs dir)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(kubecontext status aws root_indicator time)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 [ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
 [ -f ~/.docker_aliases ] && source ~/.docker_aliases
@@ -43,7 +47,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -84,7 +88,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(aws git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(aws git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -113,3 +117,13 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#zprof
+
+
+function pyenvinit(){
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+}
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
